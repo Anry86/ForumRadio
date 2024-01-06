@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+<!-- эта страница отображает один проект (карточку) -->
+{% block content %}
+    <div class="card mb-3" style="width: 70vw; ">
+        <div class="media-photo" >
+            {% autoescape off %}
+                <p class="card-text" style="margin: 20px" >
+                    {% if news_item.photo %}
+                        <img src="{{ news_item.photo.url}}" class="leftimg" width="350" alt="Photo">
+                    {% else %}
+                        <h6>Фото нет</h6>
+                    {% endif %}
+                    {{ news_item.content }}
+                </p>
+            {% endautoescape %}
+        </div>
+        <div id="time" class="card-footer text-body-secondary" style="text-align: center;">
+            {{ news_item.created_at|date:'Y-m-d H:i' }}
+        </div>
+    </div>
+{% endblock %}
+

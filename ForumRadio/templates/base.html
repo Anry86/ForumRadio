@@ -1,0 +1,71 @@
+<!doctype html>
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% include 'inc/_nav.html' %} <!-- Верхняя сторона главной страницы -->
+
+<!-- Левая сторона главной страницы -->
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Форум{% endblock %}</title> <!-- название на вкладке браузера вверху -->
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    </head>
+    <div style="height: 80px"></div>
+    <body id="body-pro">
+        <h2 style="text-align: center">{{ title }}</h2> <!-- название слева вверху -->
+        <div class="container mt-6" style="margin: 0px">
+            <div class="row" style="margin: 0px;">
+                <div class="col-md-4">
+                    {% block sidebar %}SIDEBAR{% endblock %} <!-- а тут левый список - сайдбар -->
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                            {{ massage }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{massage.tags}}" role="alert">
+                            {{ massage }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <div class="col-md-8">
+                    {% block content %}CONTENT{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        {% if page_obj.has_other_pages %}
+            <div style="width: 90vw"> <!-- ширина элемента в размер окна -->
+                <ul class="pagination" style="margin-left: 50%;"> <!-- margin-left: 45%; - положение пагинации -->
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"  href="?page={{ page_obj.previous_page_number }}">Пред...</a>
+                        </li>
+                    {% endif %}
+                    {% for p in page_obj.paginator.page_range %}
+                        {% if page_obj.number == p %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?page={{ p }}"> {{ p }} <span class="sr-only"></span> </a>
+                            </li>
+                        {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %} <!--has_next page_range-->
+                        <li class="page-item">
+                            <a class="page-link"  href="?page={{ page_obj.next_page_number }}">След...</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" ></script>
+        <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}" ></script>
+    </body>
+</html>

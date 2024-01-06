@@ -1,0 +1,15 @@
+<!-- вывод списка имён проектов слева -->
+
+{% load human_tags %}
+{% get_list_pro as projects %} <!-- обращение к файлу templatetags/human_tags.py -->
+
+<div class="list-group">
+    {% for pro in projects %}
+    <a href="{{ pro.get_absolute_url }}" class="list-group-item list-group-item-action">{{ pro.title }}
+        <!-- {{ pro.get_absolute_url }} - ссылка на выбранный проект в списке-->
+        <!-- {{ pro.title }} - название проекта-->
+
+        <span class="badge bg-primary rounded-pill" style="width: 30px; color:white;" >{{ pro.cnt }}</span></a>
+    {% endfor %}
+</div>
+

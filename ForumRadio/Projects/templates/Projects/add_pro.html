@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление проекта :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div style="width: 150%;">
+<h1>Добавление проекта</h1>
+
+<!-- <form action="{% url 'Add_pro' %}" method="post"  style="width: 1300px;"> -->
+<form action="{% url 'Add_pro' %}" method="post"  style="width: auto;" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form.none_field.errors }} <!-- проверка на правильность заполнения полей -->
+    <button type="submit" class="btn btn-primary btn-block">Добавить</button>
+</form>
+</div>
+{% endblock %}
+

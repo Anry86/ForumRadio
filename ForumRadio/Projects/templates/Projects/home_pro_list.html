@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+<!-- эта страница отображает список карточек -->
+{% block content %}
+    {% for item in projects %}
+        <div class="card mb-6" style="width: 70vw; margin-bottom: 20px"> <!-- width: 70vw - ширина карточки с новостью 70% от размера окна-->
+            <div class="card-header">
+                <h5>Название : <a href="{{ item.get_absolute_url }}">{{item.title}}</a></h5>
+            </div>
+            <div class="media" style="display:flex">
+                <div class="media-photo" style="margin: 20px ">
+                    {% if item.photo %}
+                        <img src="{{ item.photo.url}}" class="mr-3" width="350" alt="Photo">
+                    {% else %}
+                        <h6>Фото нет</h6>
+                    {% endif %}
+                </div>
+                <div class="madia-body" style="margin: 10px"> <!-- margin: 10px - отступ по кругу текста -->
+                    {% autoescape off %}
+                        <p class="card-text">{{ item.content|truncatewords:110 }}</p>
+                        <!-- |truncatewords:60 - фильтр, ограничивающий размер выводимого текста, установлен на 60 символов -->
+                    {% endautoescape %}
+                </div>
+            </div>
+                <a href="{{ item.get_absolute_url }}" class="btn btn-primary" style="margin-left: auto; margin-right: auto;">Открыть проект...</a>
+            <div class="date" style="margin-left: auto; margin-right: auto; ">
+                <p style="margin: 10px; ">
+                    {{ item.created_at|date:'Y-m-d H:i' }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+

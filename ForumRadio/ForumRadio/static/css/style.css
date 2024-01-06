@@ -1,0 +1,61 @@
+#navbar{
+    --bs-bg-opacity: 0;
+    background-color: #005 !important;  /* цвет шапки */
+    position: fixed;                    /* фиксируем положение вверху */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    font-size: 1.2em;
+}
+
+
+.card-text {
+    text-align: justify; !important;/* Выравнивание по ширине */
+    margin-right: 20px;
+}
+
+
+
+.list-group-item-action, .card{
+    --bs-bg-opacity: 0;
+    background-color: #0009 !important;  /* цвет всех контейнеров */
+}
+
+
+.navbar-brand, .nav-link, .navbar-text, a, .card-header, .madia-body{       /* обращение ко всем селекторам классам <p class="navbar-brand"><p/>*/
+      color: #aaa !important;
+}
+
+
+#time{                                              /* обращение ко всем селекторам идентификаторам <div id="time"><div/>*/
+      color: #aaa !important;
+}
+
+p{                                                  /* обращение ко всем селекторам тегам <p><p/>*/
+      color: #aaa !important;                       /* цвет текста <p><p/>*/
+}
+
+#body-home {
+  color: #fff;
+  background-image: url(images/index-fon-s.jpg);    /* фоновая картинка страницы приветствия */
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+#body-pro {
+  color: #fff;
+  background-image: url(images/pro-fon.jpg);        /* фоновая картинка страницы проектов */
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+.leftimg {
+    float:left;                     /* Выравнивание по левому краю */
+    margin: 10px 20px 10px 0px;     /* Отступы вокруг картинки */
+}
+
+.rightimg  {
+    float: right;                   /* Выравнивание по правому краю  */
+    margin: 7px 0 7px 7px;          /* Отступы вокруг картинки */
+}
